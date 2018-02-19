@@ -34,7 +34,11 @@ def detect(cfgfile, weightfile, imgfile):
             print('%s: Predicted in %f seconds.' % (imgfile, (finish-start)))
 
     class_names = load_class_names(namesfile)
-    plot_boxes(img, boxes, 'predictions.jpg', class_names)
+    print ("Filename: " + str(imgfile))
+    splitt = str(imgfile).split('/')
+    #print (splitt)
+    #print(splitt[-1])
+    plot_boxes(img, boxes, 'imageResults/' + splitt[-1], class_names)
 
 def detect_cv2(cfgfile, weightfile, imgfile):
     import cv2
@@ -67,7 +71,8 @@ def detect_cv2(cfgfile, weightfile, imgfile):
             print('%s: Predicted in %f seconds.' % (imgfile, (finish-start)))
 
     class_names = load_class_names(namesfile)
-    plot_boxes_cv2(img, boxes, savename='predictions.jpg', class_names=class_names)
+    print ("Filename: " + str(imgfile))
+    plot_boxes_cv2(img, boxes, savename=imgfile, class_names=class_names)
 
 def detect_skimage(cfgfile, weightfile, imgfile):
     from skimage import io
@@ -100,7 +105,8 @@ def detect_skimage(cfgfile, weightfile, imgfile):
             print('%s: Predicted in %f seconds.' % (imgfile, (finish-start)))
 
     class_names = load_class_names(namesfile)
-    plot_boxes_cv2(img, boxes, savename='predictions.jpg', class_names=class_names)
+    print ("Filename: " + str(imgfile))
+    plot_boxes_cv2(img, boxes, savename=imgfile, class_names=class_names)
 
 
 
