@@ -36,6 +36,7 @@ class listDataset(Dataset):
         imgpath = self.lines[index].rstrip()
 
         if self.train and index % self.batch_size == 0:
+            """
             if self.seen < 4000*self.batch_size:
                width = 13*32
                self.shape = (width, width)
@@ -51,7 +52,7 @@ class listDataset(Dataset):
             else: # self.seen < 20000*64:
                width = (random.randint(0,9) + 10)*32
                self.shape = (width, width)
-
+            """
         if self.train:
             jitter = 0.2
             hue = 0.1
