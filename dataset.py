@@ -7,8 +7,8 @@ import torch
 import numpy as np
 from torch.utils.data import Dataset
 from PIL import Image
-from utils import read_truths_args, read_truths
-from image import *
+from pytorchYolo2.utils import read_truths_args, read_truths
+from pytorchYolo2.image import *
 
 class listDataset(Dataset):
 

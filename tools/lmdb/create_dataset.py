@@ -3,6 +3,7 @@ import os
 import lmdb # install lmdb by "pip install lmdb"
 import cv2
 import numpy as np
+from builtins import range as xrange
 
 def checkImageIsValid(imageBin):
     if imageBin is None:

@@ -111,7 +111,7 @@ def convert2cpu_long(gpu_matrix):
     return torch.LongTensor(gpu_matrix.size()).copy_(gpu_matrix)
 
 def get_region_boxes(output, conf_thresh, num_classes, anchors, num_anchors, only_objectness=1, validation=False, use_cuda=True):
-    anchor_step = len(anchors)/num_anchors
+    anchor_step = len(anchors)//num_anchors
     if output.dim() == 3:
         output = output.unsqueeze(0)
     batch = output.size(0)
@@ -287,7 +287,7 @@ def read_truths(lab_path):
         return np.array([])
     if os.path.getsize(lab_path):
         truths = np.loadtxt(lab_path)
-        truths = truths.reshape(truths.size/5, 5) # to avoid single truth problem
+        truths = truths.reshape(truths.size//5, 5) # to avoid single truth problem
         return truths
     else:
         return np.array([])
@@ -351,6 +351,7 @@ def do_detect(model, img, conf_thresh, nms_thresh, use_cuda=1):
     t3 = time.time()
 
     boxes = get_region_boxes(output, conf_thresh, model.num_classes, model.anchors, model.num_anchors, use_cuda=use_cuda)[0]
+    #print(boxes)
     #for j in range(len(boxes)):
     #    print(boxes[j])
     t4 = time.time()
@@ -400,7 +401,7 @@ def file_lines(thefilepath):
     count = 0
     thefile = open(thefilepath, 'rb')
     while True:
-        buffer = thefile.read(8192*1024)
+        buffer = thefile.read(8192*1024).decode()
         if not buffer:
             break
         count += buffer.count('\n')
