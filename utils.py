@@ -171,20 +171,21 @@ def get_region_boxes(output, conf_thresh, num_classes, anchors, num_anchors, onl
             for cx in range(w):
                 for i in range(num_anchors):
                     ind = b*sz_hwa + i*sz_hw + cy*w + cx
-                    det_conf =  det_confs[ind]
+                    det_conf =  det_confs[ind].item()
                     if only_objectness:
                         conf =  det_confs[ind]
                     else:
                         conf = det_confs[ind] * cls_max_confs[ind]
     
                     if conf > conf_thresh:
-                        bcx = xs[ind]
-                        bcy = ys[ind]
-                        bw = ws[ind]
-                        bh = hs[ind]
-                        cls_max_conf = cls_max_confs[ind]
-                        cls_max_id = cls_max_ids[ind]
+                        bcx = xs[ind].item()
+                        bcy = ys[ind].item()
+                        bw = ws[ind].item()
+                        bh = hs[ind].item()
+                        cls_max_conf = cls_max_confs[ind].item()
+                        cls_max_id = cls_max_ids[ind].item()
                         box = [bcx/w, bcy/h, bw/w, bh/h, det_conf, cls_max_conf, cls_max_id]
+
                         if (not only_objectness) and validation:
                             for c in range(num_classes):
                                 tmp_conf = cls_confs[ind][c]
